@@ -1,0 +1,290 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+        <!-- Animate CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
+        <!-- Meanmenu CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/meanmenu.css' %}">
+        <!-- All CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}">
+        <!-- Fontawesome CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
+        <!-- Flaticon CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+        <!-- Nice Select CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/nice-select.min.css' %}">
+        <!-- Odometer CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/odometer.min.css' %}">
+        <!-- Magnific CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.min.css' %}">
+        <!-- Carousel CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+        <!-- Carousel Default CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/owl.theme.default.min.css' %}">
+        <!-- Style CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+        <!-- Dark CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/dark.css' %}">
+        <!-- Responsive CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+
+        {% block style %}{% endblock style %}
+        <title>Aakaar Developer - {% block title %} {% endblock title %}</title>
+
+    </head>
+
+    <body>
+
+        <!-- Start Preloader Area -->
+        <div class="preloader">
+            <div class="spinner"></div>
+        </div>
+        <!-- End Preloader Area -->
+
+        {% if not request.resolver_match.view_name == 'index_view' %}
+
+            {% include 'components/navbar_site.html' %}
+
+        {% else %}
+
+            {% include 'components/navbar_index.html' %}
+
+        {% endif %}
+
+        {% block content %} {% endblock content %}
+
+        <!-- Start Footer Area -->
+        <section class="footer-area pt-100 pb-70">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h3>AakarDevelopers </h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                ut
+                                labore et dolore aliqua.</p>
+                            <ul class="footer-social">
+                                <li>
+                                    <a href="#">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single-footer-widget pl-5">
+                            <h3>Useful Links</h3>
+
+                            <ul class="footer-quick-links">
+                                <li>
+                                    <a href="{% url 'index_view' %}">Home</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'about_view' %}">About</a>
+                                </li>
+
+                                <li>
+                                    <a href="{% url 'service_view' %}">Services</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'blog_view' %}">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="#">FAQ</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'contact_view' %}">Contact</a>
+                                </li>
+                                <li>
+                                    <a href="#">Team & Condition</a>
+                                </li>
+                                <li>
+                                    <a href="#">Privacy Policy</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h3>Contact</h3>
+
+                            <div class="footer-info-contact">
+                                <i class="flaticon-call"></i>
+                                <h3>Phone</h3>
+                                <span><a href="tel:91 ------ ----">+91 ----------</a></span>
+                            </div>
+
+                            <div class="footer-info-contact">
+                                <i class="flaticon-email"></i>
+                                <h3>Email</h3>
+                                <span><a
+                                        href="mailto:aakaardevelopers23.12.20@gmail.com"><span>aakaardevelopers23.12.20@gmail.com</span></a></span>
+                            </div>
+
+                            <div class="footer-info-contact">
+                                <i class="flaticon-pin"></i>
+                                <h3>Address</h3>
+                                <span>Juhu Beach, Mumbai, Maharashtra</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single-footer-widget pl-5">
+                            <h3>Our location</h3>
+
+                            <ul class="footer-quick-links">
+                                <li>
+                                    <iframe
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30161.356782908842!2d72.80604999311709!3d19.100214325932026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c994afbc6de9%3A0xd36760e4a1a77177!2sJuhu%20Beach!5e0!3m2!1sen!2sin!4v1655879706390!5m2!1sen!2sin"
+                                        width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lines">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+
+            <div class="shape">
+                <img src="assets/img/footer-shape.png" alt="image">
+            </div>
+        </section>
+        <!-- End Footer Area -->
+
+        <!-- Start Copy Right Section -->
+        <div class="copyright-area">
+            <div class="container">
+                <p>
+                    Copyright © AakarDevelopers. All Rights Reserved by
+                    <a href="#" target="_blank">
+                        AakarDevelopers
+                    </a>
+                </p>
+            </div>
+        </div>
+        <!-- End Copy Right Section -->
+
+        <!-- Start Go Top Area -->
+        <div class="go-top">
+            <i class="fa fa-chevron-up"></i>
+            <i class="fa fa-chevron-up"></i>
+        </div>
+        <!-- End Go Top Area -->
+
+        <!-- dark version -->
+        <div class="dark-version">
+            <label id="switch" class="switch">
+                <input type="checkbox" onchange="toggleTheme()" id="slider">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <!-- dark version -->
+
+        <!-- Jquery Slim JS -->
+        <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+        <!-- Popper JS -->
+        <script src="{% static 'assets/js/popper.min.js' %}"></script>
+        <!-- Bootstrap JS -->
+        <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+        <!-- Meanmenu JS -->
+        <script src="{% static 'assets/js/jquery.meanmenu.js' %}"></script>
+        <!-- Nice Select JS -->
+        <script src="{% static 'assets/js/jquery.nice-select.min.js' %}"></script>
+        <!-- Odometer JS -->
+        <script src="{% static 'assets/js/odometer.min.js' %}"></script>
+        <!-- Appear JS -->
+        <script src="{% static 'assets/js/jquery.appear.js' %}"></script>
+        <!-- Datepicker JS -->
+        <script src="{% static 'assets/js/datepicker.min.js' %}"></script>
+        <!-- Magnific JS -->
+        <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
+        <!-- Carousel JS -->
+        <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+        <!-- Form Ajaxchimp JS -->
+        <script src="{% static 'assets/js/jquery.ajaxchimp.min.js' %}"></script>
+        <!-- Form Validator JS -->
+        <script src="{% static 'assets/js/form-validator.min.js' %}"></script>
+        <!-- Contact JS -->
+        <script src="{% static 'assets/js/contact-form-script.js' %}"></script>
+        <!-- Custom JS -->
+        <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+        <!-- partner JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.customer-logos').slick({
+                    slidesToShow: 6,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 1500,
+                    arrows: false,
+                    dots: false,
+                    pauseOnHover: false,
+                    responsive: [{
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 4
+                        }
+                    }, {
+                        breakpoint: 520,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    }]
+                });
+            });
+        </script>
+        {% block scripts %} {% endblock scripts %}
+    </body>
+
+</html>
