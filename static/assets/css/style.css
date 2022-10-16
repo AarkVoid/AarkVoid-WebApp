@@ -3438,14 +3438,14 @@ Appointment Area CSS
   color: #ffffff;
 }
 
-.appointment-form {
+.project-request-form {
   background-color: #ffffff;
   padding: 50px 40px;
   border-radius: 2px;
   position: relative;
 }
 
-.appointment-form::before {
+.project-request-form::before {
   left: 0;
   right: 0;
   height: 20px;
@@ -3462,27 +3462,27 @@ Appointment Area CSS
   z-index: -1;
 }
 
-.appointment-form .content {
+.project-request-form .content {
   text-align: center;
   margin-bottom: 50px;
 }
 
-.appointment-form .content span {
+.project-request-form .content span {
   color: #207ef7;
 }
 
-.appointment-form .content h3 {
+.project-request-form .content h3 {
   font-size: 28px;
   margin-top: 10px;
   margin-bottom: 0;
 }
 
-.appointment-form .form-group {
+.project-request-form .form-group {
   position: relative;
   margin-bottom: 15px;
 }
 
-.appointment-form .form-group .form-control {
+.project-request-form .form-group .form-control {
   padding: 15px 20px;
   border: 1px dashed #f2f6fe;
   color: #5d5d5d;
@@ -3492,12 +3492,12 @@ Appointment Area CSS
   font-weight: 400;
 }
 
-.appointment-form .form-group .form-control:focus {
+.project-request-form .form-group .form-control:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 
-.appointment-form .form-group i {
+.project-request-form .form-group i {
   position: absolute;
   top: 17px;
   right: 20px;
@@ -3506,7 +3506,7 @@ Appointment Area CSS
   color: #04b8e5;
 }
 
-.appointment-form .nice-select {
+.project-request-form .nice-select {
   height: 50px;
   width: 100%;
   line-height: 48px;
@@ -3519,7 +3519,7 @@ Appointment Area CSS
   background-color: #f2f6fe;
 }
 
-.appointment-form .nice-select .list {
+.project-request-form .nice-select .list {
   background-color: #ffffff;
   -webkit-box-shadow: 0px 0px 29px 0px rgba(102, 102, 102, 0.1);
   box-shadow: 0px 0px 29px 0px rgba(102, 102, 102, 0.1);
@@ -3530,7 +3530,7 @@ Appointment Area CSS
   padding-bottom: 10px;
 }
 
-.appointment-form .nice-select .list .option {
+.project-request-form .nice-select .list .option {
   -webkit-transition: 0.6s;
   transition: 0.6s;
   color: #0f123b;
@@ -3538,24 +3538,24 @@ Appointment Area CSS
   padding-right: 20px;
 }
 
-.appointment-form .nice-select .list .option:hover {
+.project-request-form .nice-select .list .option:hover {
   background-color: #207ef7 !important;
   color: #ffffff;
 }
 
-.appointment-form .nice-select .list .option.selected {
+.project-request-form .nice-select .list .option.selected {
   background-color: transparent;
   font-weight: 600;
 }
 
-.appointment-form .nice-select::after {
+.project-request-form .nice-select::after {
   height: 8px;
   width: 8px;
   border-color: #04b8e5;
   right: 23px;
 }
 
-.appointment-form .appointment-btn {
+.project-request-form .project-request-btn {
   text-align: center;
 }
 
@@ -9625,4 +9625,62 @@ h2 {
 }
 .slick-arrow.slick-hidden {
   display: none;
+}
+
+/* Form Control For Form Validation errors and colors */
+.form-controls {
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.form-controls label{
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.form-controls input{
+  border: 2px solid #f0f0f0;
+  border-radius: 4px;
+  display: block;
+  padding: 10px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.form-controls.success input {
+  border-color: #2ecc71 !important;
+}
+
+.form-controlserror input {
+  border-color: #e74c3c !important;
+}
+
+.form-controls i {
+  position: absolute;
+  top: 44px;
+  right: 30px;
+  visibility: hidden;
+}
+
+.form-controls.success i.fa-check-circle {
+  visibility: visible;
+  color: #2ecc71;
+}
+
+.form-controls.error i.fa-exclamation-circle {
+  visibility: visible;
+  color: #e74c3c;
+}
+
+.form-controls small {
+  visibility: hidden;
+  position: absolute;
+  bottom: -5px;
+  left: 10px;
+}
+
+.form-controls.error small {
+  color: #e74c3c;
+  visibility: visible;
 }

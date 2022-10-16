@@ -1,0 +1,39 @@
+{
+    "navbars": [
+        {
+            "navbar_name": "Home",
+            "url": "index_view"
+        },
+        {
+            "navbar_name": "About",
+            "url": "about_view"
+        },
+        {
+            "navbar_name": "Services",
+            "url": "service_view"
+        },
+        {
+            "navbar_name": "Projects",
+            "url": "project_view"
+        },
+        {
+            "navbar_name": "Blog",
+            "url": "blog_view"
+        },
+        {
+            "navbar_name": "Contact",
+            "url": "contact_view"
+        }
+    ],
+
+    "footar-navbars": [
+        {
+            "navbar_name": "Terms and Condition",
+            "url": "index_view"
+        },
+        {
+            "navbar_name": "Privacy Policy",
+            "url": "index_view"
+        }
+    ]
+}

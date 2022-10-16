@@ -29,12 +29,12 @@
 
 
                         <div class="banner-btn">
-                            <a href="services.html" class="default-btn">
+                            <a href="{% url 'service_view' %}" class="default-btn">
                                 Services
                                 <span></span>
                             </a>
 
-                            <a href="contact.html" class="default-btn-two">
+                            <a href="{% url 'contact_view' %}" class="default-btn-two">
                                 Contact Us
                                 <span></span>
                             </a>
@@ -60,48 +60,20 @@
             <div class="col-lg-6">
                 <div class="about-content">
                     <span>About Us</span>
-                    <h3>AakarDevelopers create Website</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia omnis, rem neque doloribus
-                        minima nulla! Vel, fugiat totam nostrum possimus, dolorum voluptates magni quas sit, esse
-                        suscipit autem maxime aliquid!</p>
+                    <h3>{{ about_us.title }}</h3>
+                    <p>{{ about_us.description }}</p>
 
                     <ul class="about-features two">
-                        <li>
-                            <span>
-                                <i class='flaticon-doctor'></i>
-                                About Us
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                <i class='flaticon-worm'></i>
-                                About Us
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                <i class='flaticon-cough'></i>
-                                About Us
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                <i class='flaticon-blood-test'></i>
-                                About Us
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                <i class='flaticon-family'></i>
-                                About Us
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                <i class='flaticon-insurance'></i>
-                                About Us
-                            </span>
-                        </li>
+                        {% if about_topics %}
+                            {% for topic in about_topics %}
+                                <li>
+                                    <span>
+                                        <i class='{{ topic.icon_label }}'></i>
+                                        {{ topic.title }}
+                                    </span>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -114,96 +86,35 @@
 <section class="services-area pt-100 pb-70">
     <div class="container">
         <div class="section-title">
-            <span>Our Services</span>
-            <h2>Our Website Services</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Quis ipsum suspendisse</p>
+            <span>{{ service_detail.page_tile }}</span>
+            <h2>{{ service_detail.page_head }}</h2>
+            <p>{{ service_detail.description }}</p>
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="services-item bg-1">
-                    <div class="icon">
-                        <i class="flaticon-bacteria"></i>
+            {% if services %}
+                {% for service in services %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="services-item bg-1">
+                            <div class="icon">
+                                <i class="flaticon-bacteria"></i>
+                            </div>
+                            <a href="{% url 'service_details' service.id %}">
+                                <h3>{{ service.serviceName }}</h3>
+                            </a>
+                            <p>{{ service.serviceDescription|truncatechars:40 }}</p>
+                            <a href="{% url 'service_details' service.id %}" class="read-btn">Read More +</a>
+                        </div>
                     </div>
-                    <a href="single-services.html">
-                        <h3>Services1</h3>
-                    </a>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore dolore</p>
-                    <a href="single-services.html" class="read-btn">Read More +</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="services-item bg-1">
-                    <div class="icon">
-                        <i class="flaticon-shield"></i>
-                    </div>
-                    <a href="single-services.html">
-                        <h3>Services2</h3>
-                    </a>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore dolore</p>
-                    <a href="single-services.html" class="read-btn">Read More +</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="services-item bg-1">
-                    <div class="icon">
-                        <i class="flaticon-beauty-treatment"></i>
-                    </div>
-                    <a href="single-services.html">
-                        <h3>Services3</h3>
-                    </a>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore dolore</p>
-                    <a href="single-services.html" class="read-btn">Read More +</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="services-item bg-1">
-                    <div class="icon">
-                        <i class="flaticon-mental-health"></i>
-                    </div>
-                    <a href="single-services.html">
-                        <h3>Services4</h3>
-                    </a>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore dolore</p>
-                    <a href="single-services.html" class="read-btn">Read More +</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="services-item bg-1">
-                    <div class="icon">
-                        <i class="flaticon-crutches"></i>
-                    </div>
-                    <a href="single-services.html">
-                        <h3>Services5</h3>
-                    </a>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore dolore</p>
-                    <a href="single-services.html" class="read-btn">Read More +</a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="services-item bg-1">
-                    <div class="icon">
-                        <i class="flaticon-pregnancy"></i>
-                    </div>
-                    <a href="single-services.html">
-                        <h3>Services6</h3>
-                    </a>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore dolore</p>
-                    <a href="single-services.html" class="read-btn">Read More +</a>
-                </div>
-            </div>
+                {% endfor %}
+            {% endif %}
+        
+            <a href="{% url 'service_view' %}" class="text-center">
+                <button class="default-btn">
+                    More Services
+                    <span></span>
+                </button>
+            </a>
         </div>
     </div>
 </section>
@@ -214,153 +125,44 @@
     <div class="container-fluid">
         <div class="section-title">
             <div class="section-title">
-                <span>Our Doctors</span>
-                <h2>Specialized Doctors</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Quis ipsum suspendisse</p>
+                <span>{{ founder_details.legend }}</span>
+                <h2>{{ founder_details.title }}</h2>
+                <p>{{ founder_details.description }}</p>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-3 col-md-6">
-                <div class="doctor-item">
-                    <div class="image">
-                        <img src="{% static 'assets/img/team/image2.jpg' %}" alt="image">
-                    </div>
-                    <div class="content">
-                        <h3>Atharva</h3>
-                        <span>.....</span>
 
-                        <ul class="social">
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-pinterest-p"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            {% if founders %}
+                {% for founder in founders %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="doctor-item">
+                            <div class="image">
+                                <img src="{{ founder.user.avatar.url }}" alt="image" width="100%" class="rounded img-fluid">
+                            </div>
+                            <div class="content">
+                                <h3>{{ founder.first_name }} {{ founder.middle_name }} {{ founder.last_name }}</h3>
+                                <span>Profession: {{ founder.user.profession }}</span>
 
-            <div class="col-lg-3 col-md-6">
-                <div class="doctor-item">
-                    <div class="image">
-                        <img src="{% static 'assets/img/team/image1.jpg' %}" alt="image">
+                                <ul class="social">
+                                    {% if founder_social_links %}
+                                        {% for link in founder_social_links %}
+                                            {% if link.enable %}
+                                                <li>
+                                                    <a href="{{ link.link }}" target="_blank">
+                                                        <i class="{{ link.icon_label }}"></i>
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}    
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="content">
-                        <h3>Aakash</h3>
-                        <span>.....</span>
-
-                        <ul class="social">
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-pinterest-p"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="doctor-item">
-                    <div class="image">
-                        <img src="{% static 'assets/img/team/image3.jpg' %}" alt="image">
-                    </div>
-                    <div class="content">
-                        <h3>Onkar</h3>
-                        <span>.....</span>
-
-                        <ul class="social">
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-pinterest-p"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="doctor-item">
-                    <div class="image">
-                        <img src="{% static 'assets/img/team/image4.jpg' %}" alt="image">
-                    </div>
-                    <div class="content">
-                        <h3>Motul</h3>
-                        <span>.....</span>
-
-                        <ul class="social">
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-pinterest-p"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+                {% endfor %}
+            {% endif %}
+            
         </div>
     </div>
 </section>
@@ -374,62 +176,28 @@
 
             <div class="col-lg-12">
                 <div class="testimonials-slider owl-carousel owl-theme">
-                    <div class="testimonials-item">
-                        <div class="content">
-                            <span>Testimonials</span>
-                            <h3 class="white">What Client’s Say About Us</h3>
-                            <div class="icon">
-                                <i class="flaticon-left-quote"></i>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Lorem Ipsum is simply dummy text of the
-                                printing and</p>
 
-                            <div class="info">
-                                <img src="{% static 'assets/img/client/1.jpg' %}" alt="image">
-                                <h4 class="white">Alison Jack</h4>
-                                <p>Web Developer</p>
-                            </div>
-                        </div>
-                    </div>
+                    {% if testimonials %}
+                        {% for quote in testimonials %}
+                            <div class="testimonials-item">
+                                <div class="content">
+                                    <span>Testimonials</span>
+                                    <h3 class="white">What Client’s Say About Us</h3>
+                                    <div class="icon">
+                                        <i class="flaticon-left-quote"></i>
+                                    </div>
+                                    <p>{{ quote.thoughts }}</p>
 
-                    <div class="testimonials-item">
-                        <div class="content">
-                            <span>Testimonials</span>
-                            <h3 class="white">What Client’s Say About Us</h3>
-                            <div class="icon">
-                                <i class="flaticon-left-quote"></i>
+                                    <div class="info">
+                                        <img src="{{ quote.user.avatar.url }}" alt="image">
+                                        <h4 class="white">{{ quote.user.user.username }}</h4>
+                                        <p>{{ quote.user.profession }}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Lorem Ipsum is simply dummy text of the
-                                printing and</p>
-
-                            <div class="info">
-                                <img src="{% static 'assets/img/client/2.jpg' %}" alt="image">
-                                <h4 class="white">Alex Maxwell</h4>
-                                <p>Web Designer</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonials-item">
-                        <div class="content">
-                            <span>Testimonials</span>
-                            <h3 class="white">What Client’s Say About Us</h3>
-                            <div class="icon">
-                                <i class="flaticon-left-quote"></i>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Lorem Ipsum is simply dummy text of the
-                                printing and</p>
-
-                            <div class="info">
-                                <img src="{% static 'assets/img/client/3.jpg' %}" alt="image">
-                                <h4 class="white">Steven Smith</h4>
-                                <p>Web Developer</p>
-                            </div>
-                        </div>
-                    </div>
+                        {% endfor %}
+                    {% endif %}
+                    
                 </div>
             </div>
         </div>
@@ -512,7 +280,7 @@
                                 <span class="odometer" data-count="2700">00</span>
                                 <span class="sign-icon">+</span>
                             </h3>
-                            <p>Care Locations</p>
+                            <p>Projects</p>
                         </div>
                     </div>
 
@@ -522,7 +290,7 @@
                                 <span class="odometer" data-count="2.7">00</span>
                                 <span class="sign-icon">K</span>
                             </h3>
-                            <p>Virtual Care Solutions</p>
+                            <p>Clients</p>
                         </div>
                     </div>
 
@@ -532,7 +300,7 @@
                                 <span class="odometer" data-count="99.60">00</span>
                                 <span class="sign-icon">%</span>
                             </h3>
-                            <p>Connections Success Rate</p>
+                            <p>Accuracy</p>
                         </div>
                     </div>
 
@@ -542,65 +310,64 @@
                                 <span class="odometer" data-count="30">00</span>
                                 <span class="sign-icon">+</span>
                             </h3>
-                            <p>Award Winning</p>
+                            <p>Teams</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-6">
-                <div class="appointment-form">
+                <div class="project-request-form">
                     <div class="content">
                         <span>Call to Action</span>
-                        <h3>Make An Appointment</h3>
+                        <h3>Discuss Project Ideas</h3>
                     </div>
-                    <form>
+                    <form method="POST" action="{% url 'get_project_ideas_request' %}">
+                        {% csrf_token %}
                         <div class="row">
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="Name" placeholder="Enter Your Name">
+                                    <input type="text" class="form-control" id="Name" name="client_name" {% if request.user.is_authenticated %} value="{{ request.user.first_name }} {{ request.user.last_name }}" readonly {% endif %} placeholder="Enter Your Name">
                                     <i class="flaticon-user"></i>
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="Email" placeholder="Enter Email">
+                                    <input type="text" class="form-control" id="Email" name="client_email" {% if request.user.is_authenticated %} value="{{ request.user.email }}" {% endif %} placeholder="Enter Email">
                                     <i class="flaticon-email"></i>
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="Phone" placeholder="Enter Phone Number">
+                                    <input type="text" class="form-control" id="Phone" name="client_phone_number" placeholder="Enter Phone Number">
                                     <i class="flaticon-call"></i>
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group">
-                                    <select>
-                                        <option value="">Select Category</option>
-                                        <option value="">Cardiologists</option>
-                                        <option value="">Dermatologists</option>
-                                        <option value="">Endocrinologists</option>
-                                        <option value="">Gastroenterologists</option>
-                                        <option value="">Allergists</option>
-                                        <option value="">Immunologists</option>
+                                    <select name="client_project_type">
+                                        <option value="0">Select Project Type</option>
+                                        {% if client_project_types %}
+                                            {% for client_project_type in client_project_types %}
+                                                <option value="{{ client_project_type.id }}">{{ client_project_type.title }}</option>
+                                            {% endfor %}
+                                        {% endif %}
                                     </select>
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group">
-                                    <select>
-                                        <option value="">Select Doctor</option>
-                                        <option value="">Dr. James Adult</option>
-                                        <option value="">Dr. James Alison</option>
-                                        <option value="">Dr. Peter Adlock</option>
-                                        <option value="">Dr. Jelin Alis</option>
-                                        <option value="">Dr. Josh Taylor</option>
-                                        <option value="">Dr. Steven Smith</option>
+                                    <select name="client_working_type">
+                                        <option value="0">Select Working Type</option>
+                                        {% if client_working_types %}
+                                            {% for client_working_type in client_working_types %}
+                                                <option value="{{ client_working_type.id }}">{{ client_working_type.title }}</option>
+                                            {% endfor %}
+                                        {% endif %}
                                     </select>
                                 </div>
                             </div>
@@ -608,7 +375,7 @@
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group">
                                     <div class="input-group date" id="datetimepicker">
-                                        <input type="text" class="form-control" placeholder="Date">
+                                        <input type="text" class="form-control" name="date" placeholder="Date">
                                         <span class="input-group-addon"></span>
                                     </div>
                                     <i class="flaticon-calendar"></i>
@@ -616,9 +383,9 @@
                             </div>
 
                             <div class="col-12">
-                                <div class="appointment-btn">
+                                <div class="project-request-btn">
                                     <button type="submit" class="default-btn">
-                                        Confirm Appointment
+                                        Raise Project Request
                                         <span></span>
                                     </button>
                                 </div>

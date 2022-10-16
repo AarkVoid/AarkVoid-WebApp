@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     'main.apps.MainConfig',
     'profiles.apps.ProfilesConfig',
-    'services.apps.ServicesConfig'
+    'services.apps.ServicesConfig',
+    'aakaar_admin.apps.AakaarAdminConfig',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +67,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'main.context_processors.get_company_details',
+                'main.context_processors.display_navbar'
             ],
         },
     },
@@ -128,3 +131,8 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Google Captcha API
+GOOGLE_CAPTCHA_SITE_KEY = '6LcdaIUiAAAAAPY_vepUINJKIEh7XNu6RUzeJHa_'
+GOOGLE_CAPTCHA_SECRET_KEY = '6LcdaIUiAAAAADZhbFp9_jMtdy65jvxqGtnN-00I'
+CAPTCHA_API_URL = 'https://www.google.com/recaptcha/api/siteverify'

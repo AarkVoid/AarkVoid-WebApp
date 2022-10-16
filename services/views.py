@@ -31,4 +31,4 @@ def service_details(request, serviceId):
         'serviceDetails': serviceDetails,
         'serviceSubcatogry': serviceSubcatogry
     }
-    return render(request, 'services/single-services.html', context)
+    return render(request, 'services/services_details.html', context)
