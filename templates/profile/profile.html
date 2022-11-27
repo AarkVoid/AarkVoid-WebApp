@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section-padding course">
+
+    <div class="container mt-5 mb-5">
+
+        <div class="profile-display">
+            <div class="card p-5">
+                <div class="row">
+                    <h3 class="text-center text-success mb-4">Profile Information</h3>
+                    <div class="col-lg-4 col-md-4">
+                        <img src="{{ profile.avatar.url }}" alt="" class="img-fluid">
+                        <hr>
+                        <p class="text-primary font-weight-bold h5 text-center">Username: {{ profile.user.username|title }}</p>
+                    </div>
+                    <div class="col-lg-7 col-md-7 offset-md-1 offset-lg-1">
+                        <ul class="list-group list-group-flush mb-4">
+                            <li class="list-group-item">Full Name: {{ profile.user.first_name|title }} {{ profile.middle_name|title }} {{ profile.user.last_name|title }}</li>
+                            <li class="list-group-item">Username: {{ profile.user.username|title }}</li>
+                            <li class="list-group-item">Email: {{ profile.user.email }}</li>
+                            <li class="list-group-item">Verified: {{ profile.is_verified_email }}</li>
+                            <li class="list-group-item">Project buyed:  None</li>
+                        </ul>
+
+                        <div class="buttons">
+                            <a href="#">
+                                <button class="btn btn-success">Update Profile</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock content %}
+
+{% block script_tag %} {% endblock script_tag %}

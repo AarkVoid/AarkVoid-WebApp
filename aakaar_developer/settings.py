@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'crispy_forms',
+    'django.contrib.humanize',
+
     'main.apps.MainConfig',
     'profiles.apps.ProfilesConfig',
     'services.apps.ServicesConfig',
@@ -136,3 +139,20 @@ MEDIA_URL = '/media/'
 GOOGLE_CAPTCHA_SITE_KEY = '6LcdaIUiAAAAAPY_vepUINJKIEh7XNu6RUzeJHa_'
 GOOGLE_CAPTCHA_SECRET_KEY = '6LcdaIUiAAAAADZhbFp9_jMtdy65jvxqGtnN-00I'
 CAPTCHA_API_URL = 'https://www.google.com/recaptcha/api/siteverify'
+
+# EMAIL SENDING CONFIGURATIONS
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_USER = 'aakaardevelopers23.12.20@gmail.com'
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+EMAIL_HOST_PASSWORD = 'egqrkjeogecvbtyk'
+
+# LOGIN 
+LOGIN_URL = 'login_view'
+LOGIN_REDIRECT_URL = 'index_view'
+
+# Bootstrap 4 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

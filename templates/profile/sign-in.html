@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Sign In{% endblock title %}
+{% block title %} Sign In {% endblock title %}
 
 {% block content %}
 <!-- Start Page Title Area -->
@@ -11,7 +11,7 @@
                 <div class="page-title-content">
                     <h2>Sign In</h2>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{% url 'index_view' %}">Home</a></li>
                         <li>Sign In</li>
                     </ul>
                 </div>
@@ -26,47 +26,66 @@
     <div class="container">
         <div class="sign-in-form">
             <div class="sign-in-title">
-                <h3>Welcome Back!</h3>
-                <p>Please Sign In to your account.</p>
+                {% if not otp %}
+                    <h3>Welcome Back!</h3>
+                    <p>Please Sign In to your account.</p>
+                {% else %}
+                    <h3>Enter OTP</h3>
+                {% endif %}
             </div>
-
-            <form>
+            
+            {% if not otp %}
+            <form method="POST" class="form">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-controls">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error Message</small>
                         </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="checkme">
-                            <label class="form-check-label" for="checkme">Keep me Log In</label>
-                        </div>
-                    </div>
+                    {% endfor %}
 
                     <div class="col-lg-12 text-end">
-                        <p class="forgot-password"><a href="single-events.html">Forgot Password?</a></p>
+                        <p class="forgot-password"><a href="{% url 'password_reset_view' %}">Forgot Password?</a></p>
                     </div>
 
                     <div class="col-lg-12">
                         <div class="send-btn">
-                            <a href="#" class="default-btn">
+                            <button type="submit" class="default-btn">
                                 Log In Now
                                 <span></span>
-                            </a>
+                            </button>
                         </div>
                         <br>
                         <span>Don't have account? <a href="{% url 'register_view' %}">Signup!</a></span>
                     </div>
                 </div>
             </form>
+            {% else %}
+                        
+                <form method="POST" class="form">
+                    {% csrf_token %}
+                    
+                    <div class="form-controls">
+                        <label for="otp">OTP *</span></label>
+                        <input type="number" name="otp" id="otp" autocomplete="Type OTP..." />
+                    </div>
+
+                    <div class="form-controls">
+                        <input type="hidden" name="user" value="{{ profile.user.username }}" />
+                    </div>
+                    
+                    <div class="send-btn">
+                        <button type="submit" class="default-btn">
+                            Verify OTP
+                            <span></span>
+                        </button>
+                    </div>
+                </form>
+            {% endif %}
         </div>
     </div>
 </div>

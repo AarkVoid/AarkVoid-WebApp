@@ -36,16 +36,19 @@
                                 {% endif %}
                             {% endfor %}    
                         {% endif %}
-                        <li>
-                            <a href="{% url 'login_view' %}" class="log-in">
-                                Sign In
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'register_view' %}" class="sign-in">
-                                Sign Up
-                            </a>
-                        </li>
+
+                        {% if not request.user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'login_view' %}" class="log-in">
+                                    Sign In
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'register_view' %}" class="sign-in">
+                                    Sign Up
+                                </a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -84,6 +87,18 @@
                                     </a>
                                 </li>
                             {% endfor %}
+                            {% if request.user.is_authenticated %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ request.user }}
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="{% url 'profile_view' %}">Profile</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'logout_view' %}">Logout</a></li>
+                                    </ul>
+                                </li>
+                            {% endif %}
                         </ul>
 
                         <div class="others-options">
