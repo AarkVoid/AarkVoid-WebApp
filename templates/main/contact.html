@@ -24,7 +24,7 @@
 <!-- Start Contact Area -->
 <section class="contact-area ptb-100">
     <div class="container">
-        <div class="row">
+        {% comment %} <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="contact-info-box">
                     <div class="icon">
@@ -65,14 +65,34 @@
                     <p><a href="tel:2414524526">+241 452 4526</a></p>
                 </div>
             </div>
+        </div> {% endcomment %}
+        <div class="row">
+            {% for box in contact_section.info_boxes.all %}
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="contact-info-box">
+                        <div class="icon">
+                            <i class="{{ box.icon_class }}"></i>
+                        </div>
+                        <h3>{{ box.heading }}</h3>
+                        {% if box.line1 %}<p>{{ box.line1 }}</p>{% endif %}
+                        {% if box.line2 %}<p>{{ box.line2 }}</p>{% endif %}
+                    </div>
+                </div>
+            {% endfor %}
         </div>
 
-        <div class="section-title">
+        {% comment %} <div class="section-title">
             <span>Contact Us</span>
             <h2>Drop us Message for any Query</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                 dolore magna aliqua.</p>
+        </div> {% endcomment %}
+        <div class="section-title">
+            <span>{{ contact_section.subtitle }}</span>
+            <h2>{{ contact_section.title }}</h2>
+            <p>{{ contact_section.description }}</p>
         </div>
+
 
         <div class="contact-form">
             <form id="contactForm">

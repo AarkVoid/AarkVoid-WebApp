@@ -133,9 +133,83 @@ class ProjectRequest_Form(models.Model):
     project_type = models.ForeignKey(ClientProjectType, on_delete=models.CASCADE)
     working_type = models.ForeignKey(ClientWorkingType, on_delete=models.CASCADE)
     date = models.DateField()
+    comments = models.CharField(max_length=50, null=True, blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.client_name
+
+# *********************** END Project Request Form *******************
+
+
+# ****************** Projects Table ****************
+class Project(models.Model):
+    title = models.CharField(max_length=30)
+    project_code = models.CharField(max_length=300)
+    project_type = models.ForeignKey(ClientProjectType, on_delete=models.CASCADE)
+    working_type = models.ForeignKey(ClientWorkingType, on_delete=models.CASCADE)
+    project_date = models.DateField()
+    discreption = models.TextField()
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+    
+
+class projectPage(models.Model):
+    title = models.CharField(max_length=30)
+    subtitle = models.CharField(max_length=100)
+    text = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.title
+    
+class Blog(models.Model):
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True)
+    image = models.ImageField(upload_to='blog/')
+    content = models.TextField()
+    date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    
+class BlogDetails(models.Model):
+    title = models.CharField(max_length=30)
+    content = models.TextField()
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+    
+
+class PricingPlan(models.Model):
+    PLAN_ICON_CHOICES = [
+        ("fas fa-paper-plane", "Paper Plane"),
+        ("fas fa-gem", "Gem"),
+        ("fas fa-rocket", "Rocket"),
+    ]
+
+    title = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    icon_class = models.CharField(max_length=50, choices=PLAN_ICON_CHOICES)
+    view_link = models.URLField(default="#", help_text="Link to detail or purchase page")
+
+    def __str__(self):
+        return self.title
+
+
+class PlanFeature(models.Model):
+    plan = models.ForeignKey(PricingPlan, related_name='features', on_delete=models.CASCADE)
+    description = models.CharField(max_length=255)
+    is_included = models.BooleanField(default=True)  # True for 'true', False for 'false'
+
+    def __str__(self):
+        return f"{self.description} ({'Included' if self.is_included else 'Not Included'})"

@@ -23,151 +23,37 @@
 <!-- End Page Title Area -->
 
 <!-- Start Blog Area -->
-<section class="blog-area ptb-100">
+<section class="blog-area pt-100 pb-70">
     <div class="container-fluid">
         <div class="section-title">
             <span>News</span>
-            <h2>Our Latest News</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Quis ipsum su</p>
+            <h2>{{ blogcontent.title }}</h2>
+            <p>{{ blogcontent.content }}</p>
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-item">
-                    <div class="image">
-                        <a href="single-blog.html">
-                            <img src="assets/img/blog/image1.jpg" alt="image">
-                        </a>
+            {% for blog in Blogs %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog-item">
+                        <div class="image">
+                            {% comment %} <a href="{% url 'single_blog' blog.slug %}"> {% endcomment %}
+                            <a href="{% url 'Blog_details' blog.id %}">
+                                <img src="{{ blog.image.url }}" alt="{{ blog.title }}" style="height: 250px; width: 100%; object-fit: cover;">
+                            </a>
+                            <a href="{% url 'Blog_details' blog.id %}" class="date">{{ blog.date|date:"d F, Y" }}</a>
+                        </div>
 
-                        <a href="#" class="date">20 April, 2022</a>
-                    </div>
-
-                    <div class="content">
-                        <h3>
-                            <a href="single-blog.html">Telehealth Is Here To Stay. In Your Facility Ready?</a>
-                        </h3>
-
-                        <a href="single-blog.html" class="blog-btn">Read More +</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-item">
-                    <div class="image">
-                        <a href="single-blog.html">
-                            <img src="assets/img/blog/image2.jpg" alt="image">
-                        </a>
-
-                        <a href="#" class="date">20 April, 2022</a>
-                    </div>
-
-                    <div class="content">
-                        <h3>
-                            <a href="single-blog.html">Coronavirus stimulus checks: What you need to know</a>
-                        </h3>
-
-                        <a href="single-blog.html" class="blog-btn">Read More +</a>
+                        <div class="content">
+                            <h3>
+                                {% comment %} <a href="{% url 'single_blog' blog.slug %}">{{ blog.title }}</a> {% endcomment %}
+                                 <a href="{% url 'Blog_details' blog.id %}">{{ blog.title }}</a>
+                            </h3>
+                            <a href="{% url 'Blog_details' blog.id %}" class="blog-btn">Read More +</a>
+                            {% comment %} <a href="{% url 'single_blog' blog.slug %}" class="blog-btn">Read More +</a> {% endcomment %}
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-item">
-                    <div class="image">
-                        <a href="single-blog.html">
-                            <img src="assets/img/blog/image3.jpg" alt="image">
-                        </a>
-
-                        <a href="single-blog.html" class="date">20 April, 2022</a>
-                    </div>
-
-                    <div class="content">
-                        <h3>
-                            <a href="#">People worldwide adjust to new life amid COVID-19</a>
-                        </h3>
-
-                        <a href="single-blog.html" class="blog-btn">Read More +</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-item">
-                    <div class="image">
-                        <a href="single-blog.html">
-                            <img src="assets/img/blog/image4.jpg" alt="image">
-                        </a>
-
-                        <a href="#" class="date">20 April, 2022</a>
-                    </div>
-
-                    <div class="content">
-                        <h3>
-                            <a href="single-blog.html">New Africa coronavirus crisis looms with internal spread</a>
-                        </h3>
-
-                        <a href="single-blog.html" class="blog-btn">Read More +</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-item">
-                    <div class="image">
-                        <a href="single-blog.html">
-                            <img src="assets/img/blog/image5.jpg" alt="image">
-                        </a>
-
-                        <a href="#" class="date">20 April, 2022</a>
-                    </div>
-
-                    <div class="content">
-                        <h3>
-                            <a href="single-blog.html">Spain death toll up by almost 400 as cases rise around the
-                                globe</a>
-                        </h3>
-
-                        <a href="single-blog.html" class="blog-btn">Read More +</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-item">
-                    <div class="image">
-                        <a href="single-blog.html">
-                            <img src="assets/img/blog/image6.jpg" alt="image">
-                        </a>
-
-                        <a href="#" class="date">20 April, 2022</a>
-                    </div>
-
-                    <div class="content">
-                        <h3>
-                            <a href="single-blog.html">Can a face mask protect me from coronavirus-2022?</a>
-                        </h3>
-
-                        <a href="single-blog.html" class="blog-btn">Read More +</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-12 col-md-12">
-                <div class="pagination-area">
-                    <a href="#" class="prev page-numbers">
-                        <i class="fa fa-chevron-left"></i>
-                    </a>
-                    <a href="#" class="page-numbers">1</a>
-                    <span class="page-numbers current" aria-current="page">2</span>
-                    <a href="#" class="page-numbers">3</a>
-                    <a href="#" class="page-numbers">4</a>
-                    <a href="#" class="next page-numbers">
-                        <i class="fa fa-chevron-right"></i>
-                    </a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>

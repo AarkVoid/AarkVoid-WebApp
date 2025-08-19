@@ -38,13 +38,21 @@
             <form method="POST" class="form">
                 <div class="row">
                     {% csrf_token %}
+                    {% if form.non_field_errors %}
+                        <div class="card text-white bg-danger mb-3">
+                            <div class="card-header text-center">Oops Something Wrong</div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush bg-danger text-white">
+                                    {{ form.non_field_errors }}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+
                     {% for field in form %}
                         <div class="form-controls">
                             {{ field.label_tag }}
                             {{ field }}
-                            <i class="fas fa-check-circle"></i>
-                            <i class="fas fa-exclamation-circle"></i>
-                            <small>Error Message</small>
                         </div>
                     {% endfor %}
 

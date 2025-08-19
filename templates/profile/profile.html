@@ -22,7 +22,11 @@
                             <li class="list-group-item">Username: {{ profile.user.username|title }}</li>
                             <li class="list-group-item">Email: {{ profile.user.email }}</li>
                             <li class="list-group-item">Verified: {{ profile.is_verified_email }}</li>
-                            <li class="list-group-item">Project buyed:  None</li>
+                            {% if not profile.is_founder %}
+                                <li class="list-group-item">Project buyed:  None</li>
+                            {% else %}
+                                <li class="list-group-item">Founder:  True</li>
+                            {% endif %}
                         </ul>
 
                         <div class="buttons">

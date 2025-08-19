@@ -13,10 +13,6 @@
             "url": "service_view"
         },
         {
-            "navbar_name": "Projects",
-            "url": "project_view"
-        },
-        {
             "navbar_name": "Blog",
             "url": "blog_view"
         },

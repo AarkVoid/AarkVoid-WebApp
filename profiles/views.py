@@ -121,8 +121,10 @@ def login_view(request):
             if verified:
                 messages.success(request, f'{profile_text.title()} Your account is verified. you can login now.')
                 return redirect('login_view')
-
+        
+        print('form errors: ', form.errors)
         if form.is_valid():
+            print('form: ', form)
             user = authenticate(username=form.cleaned_data.get('username').lower(), password=form.cleaned_data.get('password'))
 
             if user is not None:

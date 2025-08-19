@@ -7,10 +7,26 @@
         .white {
             color: #fff;
         }
+        .custom-img {
+            max-width: 450px;
+            max-height: 450px;
+            width: auto;
+            height: auto;
+        }
     </style>
 {% endblock style %}
 
 {% block content %}
+
+{% if messages %}
+<div class="container">
+    {% for message in messages %}
+    <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %} 
 
 <!-- Start Main Banner Area -->
 <div class="main-banner bg-two">
@@ -18,12 +34,18 @@
         <div class="d-table-cell">
             <div class="container">
                 <div class="row align-items-center">
+                    <div class="text-center mb-4 d-flex justify-content-between align-items-center">
+                        {% if user.is_staff %}
+                            <button class="btn btn-success btn-sm" onclick="toggleBannerEdit()" id="editTrainerBtn">Edit Banner</button>
+                            <button class="btn btn-primary btn-sm ms-2" id="saveTrainerBtn" style="display:none;" onclick="saveBannerChanges()">Save Changes</button>
+                        {% endif %}
+                    </div>
+                    
                     <div class="col-lg-7">
                         <div class="main-banner-content">
-                            <h4>AakarDevelopers</h4>
-                            <h1>Website Development</h1>
-                            <p>Looking for the best place to develop
-                                your website? Contact us.</p>
+                            <h4 id="banner_subtitle" contenteditable="false" >{{ banner.small_heading }}</h4>
+                            <h1 id="banner_head" contenteditable="false" >{{ banner.main_heading }}</h1>
+                            <p id="banner_discription" contenteditable="false" >{{ banner.description }}</p>
                         </div>
 
 
@@ -45,6 +67,15 @@
         </div>
     </div>
 </div>
+
+
+<form id="bannerEditForm" method="post" action="{% url 'update_banner' %}" style="display: none;">
+    {% csrf_token %}
+    <input type="hidden" name="banner_id" id="input_banner_id" value="{{ banner.id }}" >
+    <input type="hidden" name="banner_subtitle" id="input_banner_subtitle">
+    <input type="hidden" name="banner_head" id="input_banner_head">
+    <input type="hidden" name="banner_discription" id="input_banner_discription">
+</form>
 <!-- End Main Banner Area -->
 
 <!-- Start About Area -->
@@ -60,8 +91,8 @@
             <div class="col-lg-6">
                 <div class="about-content">
                     <span>About Us</span>
-                    <h3>{{ about_us.title }}</h3>
-                    <p>{{ about_us.description }}</p>
+                    <h3 id="about_title" contenteditable="false" >{{ about_us.title }}</h3>
+                    <p id="about_discription" contenteditable="false" >{{ about_us.description }}</p>
 
                     <ul class="about-features two">
                         {% if about_topics %}
@@ -102,7 +133,7 @@
                             <a href="{% url 'service_details' service.id %}">
                                 <h3>{{ service.serviceName }}</h3>
                             </a>
-                            <p>{{ service.serviceDescription|truncatechars:40 }}</p>
+                            <p>{{ service.serviceDescription|truncatechars:80 }}</p>
                             <a href="{% url 'service_details' service.id %}" class="read-btn">Read More +</a>
                         </div>
                     </div>
@@ -138,10 +169,10 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="doctor-item">
                             <div class="image">
-                                <img src="{{ founder.user.avatar.url }}" alt="image" width="100%" class="rounded img-fluid">
+                                <img src="{{ founder.user.avatar.url }}" alt="image" class="custom-img rounded">
                             </div>
                             <div class="content">
-                                <h3>{{ founder.first_name }} {{ founder.middle_name }} {{ founder.last_name }}</h3>
+                                <h3>{{ founder.user.user.first_name }} {{ founder.user.middle_name }} {{ founder.user.user.last_name }}</h3>
                                 <span>Profession: {{ founder.user.profession }}</span>
 
                                 <ul class="social">
@@ -214,53 +245,27 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <div class="app-image">
-                    <img src="{% static 'assets/img/app-2.png' %}" alt="image">
+                    <img src="{{ appfeatures.image.url }}" alt="image">
                 </div>
             </div>
 
             <div class="col-lg-6">
                 <div class="app-content two">
-                    <span>Our _____</span>
-                    <h3>Making An Appointment for creating Your Website</h3>
-                    <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet, expedita, consequatur
-                        error aperiam suscipit magnam quis unde ut labore nostrum, similique ducimus ab. Aliquam
-                        vero alias sapiente quidem deserunt impedit.</p>
+                    
+                    <h3>{{ appfeatures.title }}</h3>
+                    <p>
+                        {{ appfeatures.description }}
+                    </p>
 
-                    <div class="app-text">
-                        <div class="icon">
-                            <i class="flaticon-calendar"></i>
-                        </div>
-                        <h4>Pick Your Package</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua.</p>
-                    </div>
-
-                    <div class="app-text">
-                        <div class="icon">
-                            <i class="flaticon-mobile-app"></i>
-                        </div>
-                        <h4>AakarDevelopers Setup</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua.</p>
-                    </div>
-
-                    <div class="app-text">
-                        <div class="icon">
-                            <i class="flaticon-patient"></i>
-                        </div>
-                        <h4>Patient Onboarding</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua.</p>
-                    </div>
-
-                    <div class="app-text">
-                        <div class="icon">
-                            <i class="flaticon-broadcasting"></i>
-                        </div>
-                        <h4>Going Live</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua.</p>
-                    </div>
+                    {% for feature in appfeatures.features.all %}
+                        <div class="app-text">
+                            <div class="icon">
+                                <i class="flaticon-broadcasting"></i>
+                            </div>
+                            <h4>{{ feature.title }}</h4>
+                            <p>{{ feature.description }}</p>
+                        </div> 
+                   {% endfor %}
                 </div>
             </div>
         </div>
@@ -271,8 +276,8 @@
 <!-- Start enquery Area -->
 <section class="appointment-area ptb-100">
     <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
+        <div class="row align-items-center justify-content-around">
+            <!-- <div class="col-lg-6">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="single-fun-fact">
@@ -314,20 +319,26 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="col-lg-6">
-                <div class="project-request-form">
-                    <div class="content">
-                        <span>Call to Action</span>
-                        <h3>Discuss Project Ideas</h3>
+                <div class="project-request-form appointment-form">
+                    <!-- Loading bar -->
+                    <div id="loadingBar" style="display:none; width:0; height:4px; background:#4CAF50; transition: width 2s;"></div>
+
+                    <!-- Notification -->
+                    <div id="notification" style="display:none; margin-top:10px; padding:8px; border-radius:6px; font-weight:500;"></div>
+
+                    <div class="content mt-3">
+                        <span>{{ contact_section.subtitle }}</span>
+                        <h3>{{ contact_section.title }}</h3>
                     </div>
-                    <form method="POST" action="{% url 'get_project_ideas_request' %}">
+                    <form method="POST" id="projectForm">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-lg-6 col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="Name" name="client_name" {% if request.user.is_authenticated %} value="{{ request.user.first_name }} {{ request.user.last_name }}" readonly {% endif %} placeholder="Enter Your Name">
+                                    <input type="text" class="form-control" id="Name" name="client_name" {% if request.user.is_authenticated %} value="{{ request.user.first_name }} {{ request.user.last_name }}" {% endif %} placeholder="Enter Your Name">
                                     <i class="flaticon-user"></i>
                                 </div>
                             </div>
@@ -383,6 +394,13 @@
                             </div>
 
                             <div class="col-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="client_comment" rows="3" placeholder="Write your comments or project details here..."></textarea>
+                                    <i class="flaticon-edit"></i>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
                                 <div class="project-request-btn">
                                     <button type="submit" class="default-btn">
                                         Raise Project Request
@@ -411,74 +429,27 @@
 
         <div class="outer-box">
             <div class="row">
-                <!-- Pricing Block -->
-                <div class="pricing-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
-                    <div class="inner-box">
-                        <div class="icon-box">
-                            <div class="icon-outer"><i class="fas fa-paper-plane"></i></div>
-                        </div>
-                        <div class="price-box">
-                            <div class="title">Static Website</div>
-                            <h4 class="price">$35.99</h4>
-                        </div>
-                        <ul class="features">
-                            <li class="true">Conference plans</li>
-                            <li class="true">Free Lunch And Coffee</li>
-                            <li class="true">Certificate</li>
-                            <li class="false">Easy Access</li>
-                            <li class="false">Free Contacts</li>
-                        </ul>
-                        <div class="btn-box">
-                            <a href="price-detail.html" class="theme-btn">View Plan</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pricing Block -->
-                <div class="pricing-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="400ms">
-                    <div class="inner-box">
-                        <div class="icon-box">
-                            <div class="icon-outer"><i class="fas fa-gem"></i></div>
-                        </div>
-                        <div class="price-box">
-                            <div class="title">Dynamic Website</div>
-                            <h4 class="price">$99.99</h4>
-                        </div>
-                        <ul class="features">
-                            <li class="true">Conference plans</li>
-                            <li class="true">Free Lunch And Coffee</li>
-                            <li class="true">Certificate</li>
-                            <li class="true">Easy Access</li>
-                            <li class="false">Free Contacts</li>
-                        </ul>
-                        <div class="btn-box">
-                            <a href="price-detail.html" class="theme-btn">View Plan</a>
+                {% for plan in plans %}
+                    <div class="pricing-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="{{ forloop.counter0|add:'0ms' }}">
+                        <div class="inner-box">
+                            <div class="icon-box">
+                                <div class="icon-outer"><i class="{{ plan.icon_class }}"></i></div>
+                            </div>
+                                <div class="price-box">
+                                <div class="title">{{ plan.title }}</div>
+                                <h4 class="price">${{ plan.price }}</h4>
+                            </div>
+                            <ul class="features">
+                            {% for feature in plan.features.all %}
+                                <li class="{% if feature.is_included %}true{% else %}false{% endif %}">{{ feature.description }}</li>
+                            {% endfor %}
+                            </ul>
+                            <div class="btn-box">
+                                <a href="{{ plan.view_link }}" class="theme-btn">View Plan</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Pricing Block -->
-                <div class="pricing-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
-                    <div class="inner-box">
-                        <div class="icon-box">
-                            <div class="icon-outer"><i class="fas fa-rocket"></i></div>
-                        </div>
-                        <div class="price-box">
-                            <div class="title">E-Commerce</div>
-                            <h4 class="price">$199.99</h4>
-                        </div>
-                        <ul class="features">
-                            <li class="true">Conference plans</li>
-                            <li class="true">Free Lunch And Coffee</li>
-                            <li class="true">Certificate</li>
-                            <li class="true">Easy Access</li>
-                            <li class="true">Free Contacts</li>
-                        </ul>
-                        <div class="btn-box">
-                            <a href="price-detail.html" class="theme-btn">View Plan</a>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}   
             </div>
         </div>
     </div>
@@ -489,119 +460,36 @@
 
 
 <!-- Start Projects Area -->
-<section class="projects-area pt-100 pb-70">
+<!-- <section class="projects-area pt-100 pb-70">
     <div class="container-fluid">
         <div class="section-title">
-            <span>Our Project</span>
-            <h2>Recent Project Cases</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Quis ipsum suspendisse</p>
+            <span>{{ projectData.title }}</span>
+            <h2>{{ projectData.subtitle }}</h2>
+            <p>{{ projectData.text }}</p>
         </div>
 
         <div class="row">
+            {% for project in Projects %}
             <div class="col-lg-4 col-md-6">
                 <div class="projects-item">
-                    <div class="image">
-                        <a href="#">
-                            <img src="{% static 'assets/img/projects/image1.jpg' %}" alt="image">
+                    <div class="image" >
+                        <a href="#"  style="display: flex; justify-content: center;">
+                            <img src="{{ project.image.url }}" style="height:250px; width:300px;" alt="image">
                         </a>
                     </div>
                     <div class="content">
                         <p>
                             <a href="#">
-                                Project1
+                                {{ project.title}}
                             </a>
                         </p>
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="projects-item">
-                    <div class="image">
-                        <a href="#">
-                            <img src="{% static 'assets/img/projects/image2.jpg' %}" alt="image">
-                        </a>
-                    </div>
-                    <div class="content">
-                        <p>
-                            <a href="#">
-                                Project2
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="projects-item">
-                    <div class="image">
-                        <a href="#">
-                            <img src="{% static 'assets/img/projects/image3.jpg' %}" alt="image">
-                        </a>
-                    </div>
-                    <div class="content">
-                        <p>
-                            <a href="#">
-                                Project3
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="projects-item">
-                    <div class="image">
-                        <a href="#">
-                            <img src="{% static 'assets/img/projects/image4.jpg' %}" alt="image">
-                        </a>
-                    </div>
-                    <div class="content">
-                        <p>
-                            <a href="#">
-                                Project4
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="projects-item">
-                    <div class="image">
-                        <a href="#">
-                            <img src="{% static 'assets/img/projects/image5.jpg' %}" alt="image">
-                        </a>
-                    </div>
-                    <div class="content">
-                        <p>
-                            <a href="#">
-                                Project5
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="projects-item">
-                    <div class="image">
-                        <a href="#">
-                            <img src="{% static 'assets/img/projects/image6.jpg' %}" alt="image">
-                        </a>
-                    </div>
-                    <div class="content">
-                        <p>
-                            <a href="#">
-                                Project5
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
-</section>
+</section> -->
 <!-- End Projects Area -->
 
 
@@ -610,71 +498,33 @@
     <div class="container-fluid">
         <div class="section-title">
             <span>News</span>
-            <h2>Our Latest News</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Quis ipsum su</p>
+            <h2>{{ blogcontent.title }}</h2>
+            <p>{{ blogcontent.content }}</p>
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-item">
-                    <div class="image">
-                        <a href="single-blog.html">
-                            <img src="{% static 'assets/img/blog/image1.jpg' %}" alt="image">
-                        </a>
+            {% for blog in Blogs %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog-item">
+                        <div class="image">
+                            {% comment %} <a href="{% url 'single_blog' blog.slug %}"> {% endcomment %}
+                            <a href="#">
+                                <img src="{{ blog.image.url }}" alt="{{ blog.title }}" style="height: 250px; width: 100%; object-fit: cover;">
+                            </a>
+                            <a href="#" class="date">{{ blog.date|date:"d F, Y" }}</a>
+                        </div>
 
-                        <a href="#" class="date">20 April, 2022</a>
-                    </div>
-
-                    <div class="content">
-                        <h3>
-                            <a href="single-blog.html">Website Is Here To Stay. In Your Facility Ready?</a>
-                        </h3>
-
-                        <a href="single-blog.html" class="blog-btn">Read More +</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-item">
-                    <div class="image">
-                        <a href="single-blog.html">
-                            <img src="{% static 'assets/img/blog/image2.jpg' %}" alt="image">
-                        </a>
-
-                        <a href="#" class="date">20 April, 2022</a>
-                    </div>
-
-                    <div class="content">
-                        <h3>
-                            <a href="single-blog.html">Website Is Here To Stay. In Your Facility Ready?</a>
-                        </h3>
-
-                        <a href="single-blog.html" class="blog-btn">Read More +</a>
+                        <div class="content">
+                            <h3>
+                                {% comment %} <a href="{% url 'single_blog' blog.slug %}">{{ blog.title }}</a> {% endcomment %}
+                                 <a href="{% url 'Blog_details' blog.id %}">{{ blog.title }}</a>
+                            </h3>
+                            <a href="{% url 'Blog_details' blog.id %}" class="blog-btn">Read More +</a>
+                            {% comment %} <a href="{% url 'single_blog' blog.slug %}" class="blog-btn">Read More +</a> {% endcomment %}
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-item">
-                    <div class="image">
-                        <a href="single-blog.html">
-                            <img src="{% static 'assets/img/blog/image3.jpg' %}" alt="image">
-                        </a>
-
-                        <a href="#" class="date">20 April, 2022</a>
-                    </div>
-
-                    <div class="content">
-                        <h3>
-                            <a href="single-blog.html">Website Is Here To Stay. In Your Facility Ready?</a>
-                        </h3>
-
-                        <a href="single-blog.html" class="blog-btn">Read More +</a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -682,7 +532,7 @@
 
 
 <!-- our partner Area -->
-<div class="container mb-5">
+{% comment %} <div class="container mb-5">
     <div class="container-fluid">
         <div class="section-title">
             <span>News</span>
@@ -703,5 +553,107 @@
 
     </section>
 
-</div>
+</div> {% endcomment %}
 {% endblock content %}
+
+{% block scripts %} 
+    <script>
+        function toggleBannerEdit() {
+        
+            document.getElementById(`banner_subtitle`).contentEditable = 'true';
+            document.getElementById(`banner_head`).contentEditable = 'true';
+            document.getElementById(`banner_discription`).contentEditable = 'true';
+            document.getElementById('editTrainerBtn').style.display = 'none';
+            document.getElementById('saveTrainerBtn').style.display = 'inline-block';
+
+            alert("Slider is now editable. After making changes, click Save.");
+        }
+
+        function saveBannerChanges() {
+            document.getElementById(`input_banner_subtitle`).value = document.getElementById(`banner_subtitle`).innerText;
+            document.getElementById(`input_banner_head`).value = document.getElementById(`banner_head`).innerText;
+            document.getElementById(`input_banner_discription`).value = document.getElementById(`banner_discription`).innerText;
+
+        alert("Saving changes to sliders...");
+        document.getElementById('bannerEditForm').submit();
+        }
+    </script>
+
+    <script>
+    document.getElementById("projectForm").addEventListener("submit", async function(e) {
+        e.preventDefault(); // prevent normal form submission
+
+        const formData = new FormData(this);
+        const loadingBar = document.getElementById("loadingBar");
+        const notification = document.getElementById("notification");
+
+        // Reset notification and show loading bar
+        notification.style.display = "none";
+        loadingBar.style.display = "block";
+        loadingBar.style.width = "0"; 
+        setTimeout(() => { loadingBar.style.width = "100%"; }, 50);
+
+        try {
+            const response = await fetch("{% url 'get_project_ideas_request' %}", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken")
+                }
+            });
+
+            // wait a couple of seconds for effect
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            loadingBar.style.display = "none"; // hide loading bar
+
+            const data = await response.json(); // ✅ parse JSON
+
+            if (data.status === "success") {
+                console.log("Success:", data);
+
+                // Show success notification
+                notification.style.display = "block";
+                notification.style.background = "#e6ffed";
+                notification.style.color = "#2d7a46";
+                notification.textContent = "✅ " + data.message;
+            } else {
+                console.error("Error:", data);
+
+                // Show error notification
+                notification.style.display = "block";
+                notification.style.background = "#ffe6e6";
+                notification.style.color = "#a33";
+                notification.textContent = "❌ " + data.message;
+            }
+        } catch (error) {
+            console.error("Request failed:", error);
+
+            // Show error notification
+            notification.style.display = "block";
+            notification.style.background = "#ffe6e6";
+            notification.style.color = "#a33";
+            notification.textContent = "⚠️ Something went wrong!";
+        }
+    });
+
+    // Helper function to get CSRF token from cookies
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+            const cookies = document.cookie.split(";");
+            for (let cookie of cookies) {
+                cookie = cookie.trim();
+                if (cookie.startsWith(name + "=")) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+</script>
+
+{% endblock scripts %}
+

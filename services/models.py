@@ -31,3 +31,4 @@ class SubCategoryService(models.Model):
 
     def __str__(self):
         return str(self.serviceName)
+    

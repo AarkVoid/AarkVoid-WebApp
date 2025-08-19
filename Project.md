@@ -23,3 +23,14 @@ Form Validation: Project Request Form
 Navbars Dynamic using JSON
 
 Notification Message Style (aakash)
+
+Admin Credentials
+- Username : admin
+- Password : aakaar
+
+Last time i worked on
+created project tables in admin app without migrations
+
+# 2025-08-19
+1) Instagram account need to create of aarkvoid
+2) Facebook account need to create of aarkvoid

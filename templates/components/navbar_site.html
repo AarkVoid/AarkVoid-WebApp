@@ -12,11 +12,11 @@
                         </li> -->
                         <li>
                             <i class='flaticon-phone-call'></i>
-                            <a href="tel:919160043715">Call Us: +919160043715 </a>
+                            <a href="tel:919160043715">Call Us: +91{{ company.companyMobile }} </a>
                         </li>
                         <li>
                             <i class='flaticon-paper-plane'></i>
-                            <a href="mailto:aakaardevelopers23.12.20@gmail.com"><span>aakaardevelopers23.12.20@gmail.com</span></a>
+                            <a href="mailto:{{ company.companyEmail }}"><span>{{ company.companyEmail }}</span></a>
                         </li>
                     </ul>
                 </div>
@@ -34,16 +34,19 @@
                                 {% endif %}
                             {% endfor %}    
                         {% endif %}
-                        <li>
-                            <a href="{% url 'login_view' %}" class="log-in">
-                                Sign In
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'register_view' %}" class="sign-in">
-                                Sign Up
-                            </a>
-                        </li>
+
+                        {% if not request.user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'login_view' %}" class="log-in">
+                                    Sign In
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'register_view' %}" class="sign-in">
+                                    Sign Up
+                                </a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -57,8 +60,8 @@
                 <div class="main-responsive-menu">
                     <div class="logo">
                         <a href="index.html">
-                        <img src="{% static 'assets/img/logo.png' %}" class="black-logo" alt="image">
-                        <img src="{% static 'assets/img/logo-2.png' %}" class="white-logo" alt="image">        
+                            <img src="{% static 'assets/img/logo1.png' %}" class="black-logo" alt="image">
+                            <img src="{% static 'assets/img/logo-2.png' %}" class="white-logo" alt="image" style="display: none;">       
                     </a>
                     </div>
                 </div>
@@ -69,8 +72,8 @@
             <div class="container">
                 <nav class="navbar navbar-expand-md navbar-light">
                     <a href="{% url 'index_view' %}">
-                        <img src="{% static 'assets/img/logo.png' %}" class="black-logo" alt="image">
-                        <img src="{% static 'assets/img/logo-2.png' %}" class="white-logo" alt="image">      
+                        <img src="{% static 'assets/img/logo1.png' %}" class="black-logo" alt="image">
+                        <img src="{% static 'assets/img/logo-2.png' %}" class="white-logo" alt="image" style="display: none;"> 
                     </a>
 
                     <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import AboutUs_Detail, Abouts_Topic, ServicePage_Detail, Maintenance_Detail, Maintenance_Topic, \
-    Founder, Founder_Details, Testimonial, FounderSocialMedia, ClientProjectType, ClientWorkingType, ProjectRequest_Form
+    Founder, Founder_Details, Testimonial, FounderSocialMedia, ClientProjectType, ClientWorkingType, ProjectRequest_Form, \
+    projectPage,Project,Blog,BlogDetails,PricingPlan,PlanFeature
 
 @admin.register(AboutUs_Detail)
 class AboutUs_DetailAdmin(admin.ModelAdmin):
@@ -12,7 +13,7 @@ class Abouts_TopicAdmin(admin.ModelAdmin):
 
 @admin.register(ServicePage_Detail)
 class ServicePage_DetailAdmin(admin.ModelAdmin):
-    list_display = ['page_tile', 'page_head', 'description', 'created', 'updated']
+    list_display = ['page_tile', 'page_head', 'created', 'updated']
 
 @admin.register(Maintenance_Detail)
 class Maintenance_DetailAdmin(admin.ModelAdmin):
@@ -49,3 +50,23 @@ class ClientWorkingTypeAdmin(admin.ModelAdmin):
 @admin.register(ProjectRequest_Form)
 class ProjectRequest_FormAdmin(admin.ModelAdmin):
     list_display = ['client_name', 'client_email', 'client_phone_number', 'project_type', 'working_type', 'date', 'created', 'updated']
+
+@admin.register(projectPage)
+class projectPage_Admin(admin.ModelAdmin):
+    list_display = ['title','subtitle','text']
+
+@admin.register(Project)
+class Projects_Admin(admin.ModelAdmin):
+    list_display = ['title','project_code','project_type','working_type','project_date']
+
+@admin.register(Blog)
+class Blog_Admin(admin.ModelAdmin):
+    list_display = ['title','slug','date']
+
+@admin.register(BlogDetails)
+class BlogDetails_Admin(admin.ModelAdmin):
+    list_display = ['title','updated']
+
+
+admin.site.register(PricingPlan)
+admin.site.register(PlanFeature)

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %} Services {% endblock title %}
+
+{% block content %}
+
+
+        <!-- Start Page Title Area -->
+        <div class="page-title-area item-bg-5">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="page-title-content">
+                            <h2>Blog Details</h2>
+                            <ul>
+                                <li><a href="{% url 'index_view' %}">Home</a></li>
+                                <li>Blog Details</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Page Title Area -->
+
+        <!-- Start Services Area -->
+            <section class="services-section bg-f4f6fe pt-100 pb-100">
+                <div class="container pt-100 pb-100">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10">
+                            <h2 class="mb-3">{{ BlogDetails.title }}</h2>
+                            <p class="text-muted">Published on {{ BlogDetails.date }}</p>
+                            <img src="{{ BlogDetails.image.url }}" alt="{{ BlogDetails.title }}" class="img-fluid mb-4">
+                            <div>{{ BlogDetails.content|linebreaks }}</div>
+                            <a href="{% url 'blog_view' %}" class="btn btn-secondary mt-4">← Back to blog</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <!-- End Services Area -->
+<section class="pt-100 pb-100" style="background-color: #f0f8ff;">
+    <div class="container">
+        <div class="section-title">
+            <h2>All Our Services</h2>
+        </div>
+
+        <div class="row">
+            {% for blog in blogs %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="services-item-two shadow-sm p-4 bg-white rounded text-center">
+                    <div class="icon mb-3">
+                        <i class="flaticon-settings"></i>
+                    </div>
+                    <a href="{% url 'Blog_details' blog.id %}">
+                        <h4>{{ blog.title }}</h4>
+                    </a>
+                    <p>{{ blog.content|truncatechars:80 }}</p>
+                    <a href="{% url 'Blog_details' blog.id %}" class="read-btn">Read More +</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock content %}

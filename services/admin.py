@@ -15,3 +15,4 @@ class ServiceDetail(admin.ModelAdmin):
 @admin.register(SubCategoryService)
 class SubCategoryService(admin.ModelAdmin):
     list_display = ['serviceName','SubCategoryName','description']
+

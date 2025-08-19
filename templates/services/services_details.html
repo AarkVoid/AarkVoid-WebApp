@@ -5,66 +5,57 @@
 {% block content %}
 
 
-        <!-- Start Page Title Area -->
-        <div class="page-title-area item-bg-5">
-            <div class="d-table">
-                <div class="d-table-cell">
-                    <div class="container">
-                        <div class="page-title-content">
-                            <h2>Services Details</h2>
-                            <ul>
-                                <li><a href="{% url 'index_view' %}">Home</a></li>
-                                <li>Services Details</li>
-                            </ul>
-                        </div>
+    <!-- Start Page Title Area -->
+    <div class="page-title-area item-bg-5">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container">
+                    <div class="page-title-content">
+                        <h2>Services Details</h2>
+                        <ul>
+                            <li><a href="{% url 'index_view' %}">Home</a></li>
+                            <li>Services Details</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End Page Title Area -->
+    </div>
+    <!-- End Page Title Area -->
 
-        <!-- Start Services Area -->
-            <section class="services-section bg-f4f6fe pt-100 pb-100">
-                <div class="container">
-                    <div>
-                        <h2>Our {{ serviceDetails.serviceName.serviceName }} Services</h2>
-                        <p>{{ serviceDetails.description }}</p>
-                    </div>
+    <!-- Start Services Area -->
+        <section class="services-section bg-f4f6fe pt-100 pb-100">
+            <div class="container">
+                <div>
+                    <h2>Our {{ serviceDetails.serviceName.serviceName }} Services</h2>
+                    <p>{{ serviceDetails.description }}</p>
+                </div>
+            </div>
+        </section>
 
-                    <div class="row" style="padding-top: 4rem;">
-                        {% for Subcatogry in serviceSubcatogry %}
-                            <div class="col-lg-4 col-md-6">
-                                <div class="services-item-two">
-                                    <div class="icon">
-                                        <i class="flaticon-bacteria"></i>
-                                    </div>
-                                    <a href="single-services.html">
-                                        <h3>{{ Subcatogry.SubCategoryName }}</h3>
-                                    </a>
-                                    <p>{{ Subcatogry.description }}</p>
-                                </div>
-                            </div>
-                        {% endfor %}
+    <!-- End Services Area -->
+    <section class="pt-100 pb-100" style="background-color: #f0f8ff;">
+        <div class="container">
+            <div class="section-title">
+                <h2>All Our Services</h2>
+            </div>
 
+            <div class="row">
+                {% for service in all_services %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="services-item-two shadow-sm p-4 bg-white rounded text-center">
+                        <div class="icon mb-3">
+                            <i class="flaticon-bacteria"></i>
+                        </div>
+                        <a href="{% url 'service_details' service.id %}">
+                            <h4>{{ service.serviceName }}</h4>
+                        </a>
+                        <p>{{ service.serviceDescription|truncatechars:80 }}</p>
+                        <a href="{% url 'service_details' service.id %}" class="read-btn">Read More +</a>
                     </div>
                 </div>
-            </section>
-        <!-- End Services Area -->
-
-        
-        <!-- Start Go Top Area -->
-        <div class="go-top">
-            <i class="fa fa-chevron-up"></i>
-            <i class="fa fa-chevron-up"></i>
+                {% endfor %}
+            </div>
         </div>
-        <!-- End Go Top Area -->
-
-        <!-- dark version -->
-        <div class="dark-version">
-            <label id="switch" class="switch">
-                <input type="checkbox" onchange="toggleTheme()" id="slider">
-                <span class="slider round"></span>
-            </label>
-        </div>
-        <!-- dark version -->
+    </section>
 {% endblock content %}
